@@ -96,6 +96,32 @@ def compileCode():
         res = "Syntax Analysis Successful without problems found."
         displayMsg.insert(END, res)
         displayMsg.pack()
+
+    #proceed to functionality
+    #split the string into line and individually check the functionality of each keyword in line
+    code_function()
+
+def code_function():
+    #needs array of the original codes before tokenized
+    #split code into line
+    #send each line to another function
+    #check each word on each line
+    #assuming the code was created correctly(checked both lexical and syntax), assume functionality of keyword
+    #create a match() for each keyword, if not keyword, assume either variable or constant
+    #create an empty array to store output
+    
+    #idea, prepare var table to hold
+     #for int/num/str, prepare variable with no content
+    #for Beg, pause the program to ask user for input, check table for var name and save content to said var
+    # for NEWLN, switch to next element of output array
+    #for operators, take the next 2 element and apply the correct operation
+    #for print, print the current var or constant
+    
+    #if IOL, start the program
+    #if LOI, print Program terminated successfuly and end the code_function()
+    
+    return 0
+
     
 def syntax():
     testArray = []
