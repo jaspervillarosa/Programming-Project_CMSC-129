@@ -1,1 +1,3 @@
-# Programming-Project_CMSC-129
+# cmsc-129-prog-exer4
+Programming Exercise 04 - Syntax Analysis
+
