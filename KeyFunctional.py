@@ -1,5 +1,11 @@
 from array import array
 
+def var_reveal(Input, index, var_arr):
+    #check for var in var_arr
+    for index in range(len(var_arr)):
+        if(Input == var_arr[index][0]):
+            return var_arr[index][1]
+
 def line_compile(Input, Token, var_arr):
     print(Input)
     # print(Token)
@@ -33,10 +39,9 @@ def line_compile(Input, Token, var_arr):
             
             case "MULT":
             #save the next 3 words and perform multiplication
-            case "DIV":
-            case "ADD":
-            case "SUB":
-            case "MOD":
+                MULT_func(Input, Token, index, var_arr)
+
+
             
 
     return var_arr
@@ -46,10 +51,19 @@ def IS_func(Input, index):
     #call the table, assign var and its value as tuple to the table\\
     #assuming IS is the index, the index-1 should be the variable, index+1 should be value
     #check if operator, a variable, or none
-    keyword = Input[index+1]
-
-    match keyword:
-       
-
-
+    keyword = Input[index+1]       
     return (Input[index-1], Input[index+1])
+
+def MULT_func(Input, Token, index, var_arr):
+    #check the next 2 words, convert if var
+    if(Token[index+1] == "IDENT"):
+        num1 = var_reveal(Input, index+1, var_arr)
+    else:
+        num1 = Input[index+1]
+    
+    if(Token[index+2] == "IDENT"):
+        num2 = var_reveal(Input, index+2, var_arr)
+    else:
+        num2 = Input[index+2]
+    
+    return num1 * num2
