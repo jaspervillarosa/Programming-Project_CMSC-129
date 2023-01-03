@@ -10,7 +10,7 @@ def sourceCodeTokenizer(Arr):
     var_pattern = re.compile("^[A-Za-z][A-Za-z0-9]*$")
     str_pattern = re.compile("^STR$")
     int_pattern =re.compile("^INT$")
-    into_pattern = re.compile("^INTO$")
+    # into_pattern = re.compile("^INTO$")
     is_pattern = re.compile("^IS$")
     beg_pattern = re.compile("^BEG$")
     print_pattern = re.compile("^PRINT$")
@@ -63,8 +63,8 @@ def sourceCodeTokenizer(Arr):
                 tokenizeArray.append("STR")                                                                                                             #append STR to tokenizeArray    
             elif int_pattern.match(Arr[i][j]) != None:                                                                                                  #if current word matches INT
                 tokenizeArray.append("INT")                                                                                                             #append INT to tokenizeArray
-            elif into_pattern.match(Arr[i][j]) != None:                                                                                                 #if current word matches INTO
-                tokenizeArray.append("INTO")                                                                                                            #append INTO to tokenizeArray
+            # elif into_pattern.match(Arr[i][j]) != None:                                                                                                 #if current word matches INTO
+            #     tokenizeArray.append("INTO")                                                                                                            #append INTO to tokenizeArray
             elif is_pattern.match(Arr[i][j]) != None:                                                                                                   #if current word matches IS
                 tokenizeArray.append("IS")                                                                                                              #append IS to tokenizeArray
             elif beg_pattern.match(Arr[i][j]) != None:                                                                                                  #if current word matches BEG

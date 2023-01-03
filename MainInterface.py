@@ -61,12 +61,8 @@ def compileCode():
     inputStringName = os.path.basename(path)
     array = []
     Arr = convertTextToArray(file)
-    print("array ni")
-    print(Arr)
     finalTokenArr, varTable, errorEncountered, errorLine, unknownWord= sourceCodeTokenizer(Arr)
-    print("start")
-    print(finalTokenArr)
-    print("end")
+
     saveTokenToFile(finalTokenArr)
     
     if errorEncountered == True:
@@ -106,15 +102,10 @@ def compileCode():
     code_function()
 
 def code_function():
-    file = textEditor.get(1.0, tkinter.END)
-    Arr = convertTextToArray(file)
     #needs array of the original codes before tokenized
     #split code into line
-    
     #send each line to another function
     #check each word on each line
-    
-
     #assuming the code was created correctly(checked both lexical and syntax), assume functionality of keyword
     #create a match() for each keyword, if not keyword, assume either variable or constant
     #create an empty array to store output
