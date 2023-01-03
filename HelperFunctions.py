@@ -6,8 +6,11 @@ def convertTextToArray(textFile):
     #for loop to iterate the array that contains the elements of the input file by line
     for i in range(len(content)): 
         content2 = content[i].split(" ")        #individualizes the words per elements from the lines 
-        Arr.append(content2)                    #stores into another array
-                                                    
+                            #stores into another array
+        if i == (len(content)-1):
+            content[-1] == "LOI"
+            return Arr
+        Arr.append(content2)                                           
     return Arr                                  #returns the Arr that will be used for tokenization
 #function to save the Arr into .tkn file
 def saveTokenToFile(Arr):
@@ -22,5 +25,5 @@ def saveTokenToFile(Arr):
         
         if i != (len(Arr)-1):
             outputFile.write("\n")
-
+    
     outputFile.close()
