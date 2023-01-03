@@ -4,7 +4,7 @@ STR msg1 STR msg2 STR msg3
 BEG msg1 BEG msg2
 BEG msg3
 NEWLN
-INTO res IS MULT num num
+INT res IS MULT num num
 PRINT msg2
 PRINT MULT num 2
 NEWLN
