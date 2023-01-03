@@ -61,8 +61,10 @@ def compileCode():
     inputStringName = os.path.basename(path)
     array = []
     Arr = convertTextToArray(file)
+    print("arr")
+    print(Arr)
     finalTokenArr, varTable, errorEncountered, errorLine, unknownWord= sourceCodeTokenizer(Arr)
-
+    
     saveTokenToFile(finalTokenArr)
     
     if errorEncountered == True:
@@ -99,9 +101,9 @@ def compileCode():
 
     #proceed to functionality
     #split the string into line and individually check the functionality of each keyword in line
-    code_function()
+    code_function(Arr)
 
-def code_function():
+def code_function(Arr):
     #needs array of the original codes before tokenized
     #split code into line
     #send each line to another function
