@@ -35,8 +35,9 @@ def line_compile(Input, Token, var_arr, varTable, finalTokenArr):
                 var_arr.append(BEG_func(Input, Token, var_arr, varTable, index))
                 
             
-
-
+            case "PRINT":
+                PRINT_func(Input, Token, varTable, index, var_arr)
+                
             # case "NEWLN":
             #     #add new line
             #     return
@@ -46,8 +47,11 @@ def line_compile(Input, Token, var_arr, varTable, finalTokenArr):
             #     MULT_func(Input, Token, index, var_arr)
 
 
-            
-
+    for i in range(len(var_arr)) :
+        if (len(var_arr[i])) != 2:
+            var_arr.pop(i) 
+            break
+    
     return var_arr
 
 def BEG_func(Input, Token, var_arr, varTable, index):
@@ -72,15 +76,54 @@ def BEG_func(Input, Token, var_arr, varTable, index):
                 
                 
 
-
-
+def PRINT_func(Input, Token, varTable, index, var_arr):
+    # print("wow")
+    # print("nisulod sa PRINT")
+    # print(Input[index])
+    value = -1
+    rightword = Input[index+1]
+    tokenrightword = Token[index+1]
+    
+    # print(var_arr)
+    # print("----")
+    # print(rightword)
+    if tokenrightword == "IDENT":
+        for i in range(len(var_arr)):
+            # print("=====")
+            # print(var_arr[i][0][1] + "vs" + rightword)
+            temp = var_arr[i][0][1]
+            if rightword == temp:
+                #print("nakasulod diri" + rightword)
+                value = var_arr[i][1]
+                print("the value of "+ rightword + " is " + value)
+    elif tokenrightword == "MULT":
+        print("operator iyang tapad.")
+        #iinsert ang operation na rule
+    elif tokenrightword == "MOD":
+        print("operator iyang tapad.")
+        #iinsert ang operation na rule
+    elif tokenrightword == "DIV":
+        print("operator iyang tapad.")
+        #iinsert ang operation na rule
+    elif tokenrightword == "ADD":
+        print("operator iyang tapad.")
+        #iinsert ang operation na rule
+    elif tokenrightword == "SUB":
+        print("operator iyang tapad.")
+        #iinsert ang operation na rule
+    else:
+        value = rightword
+        print("the value of "+ rightword + " is " + value)
+    #print("++++")
+    
+    
 def IS_func(Input, varTable, index, Token):
     holder =  ""
-    print("-----")
-    print(Token)
-    print("nisulod sa IS")
-    print("nadakpan si is")
-    print(Input[index])
+    # print("-----")
+    # print(Token)
+    # print("nisulod sa IS")
+    # print("nadakpan si is")
+    # print(Input[index])
     
     leftword = Input[index-1]                             #get lefword ni is 
     inputrightword = Input[index+1]                       #get rightword ni is
