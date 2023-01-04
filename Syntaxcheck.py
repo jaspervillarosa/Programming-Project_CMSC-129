@@ -26,6 +26,10 @@ def checksyntax(Arr):
                 iolctr = int_syntax(Arr, index)
                 iolctrArray.append(iolctr)
                 print(iolctr)
+            case "INTO":
+                iolctr = into_syntax(Arr, index)
+                iolctrArray.append(iolctr)
+                print(iolctr)    
             case "IDENT":
                 iolctr = ident_syntax(Arr, index)
                 iolctrArray.append(iolctr)
@@ -109,6 +113,12 @@ def int_syntax(Arr, index):
     else:
         return("2", "INT initialised at the end of line")
 
+def into_syntax(Arr, index):
+    if Arr[index+1] != "IDENT":
+        return ("2", "IDENT is not NEXT")
+    else:
+        return ("1", "")
+
 def intLit_syntax(Arr, index): #INT IDENT IS INT_LIT
     literals = ["IS", "IDENT"]
     if Arr[index-1] not in literals:
@@ -117,7 +127,7 @@ def intLit_syntax(Arr, index): #INT IDENT IS INT_LIT
         return("1","")
 
 def ident_syntax(Arr, index):
-    literals = ["INT", "STR", "BEG", "PRINT", "IDENT"]
+    literals = ["INT", "INTO", "STR", "BEG", "PRINT", "IDENT"]
     operatorLiterals = ["ADD", "SUB", "MULT", "DIV", "MOD"]
     operatorRightSide = ["IDENT", "INT_LIT"]
     if Arr[index-1] in literals:

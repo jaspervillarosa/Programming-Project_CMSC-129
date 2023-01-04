@@ -10,7 +10,7 @@ def sourceCodeTokenizer(Arr):
     var_pattern = re.compile("^[A-Za-z][A-Za-z0-9]*$")
     str_pattern = re.compile("^STR$")
     int_pattern =re.compile("^INT$")
-    # into_pattern = re.compile("^INTO$")
+    into_pattern = re.compile("^INTO$")
     is_pattern = re.compile("^IS$")
     beg_pattern = re.compile("^BEG$")
     print_pattern = re.compile("^PRINT$")
@@ -23,6 +23,7 @@ def sourceCodeTokenizer(Arr):
     #lines 24-26 array initializations
     identifiedVariables = []
     finalTokenArr = []
+    varctr = ("", "")
     varTable = []
     #nested for loop that iterates through the individualized contents of the input file
     for i in range(len(Arr)):
@@ -43,11 +44,13 @@ def sourceCodeTokenizer(Arr):
                 tokenizeArray.append("INT_LIT")                                                                                                         #appends "INT_LIT" into the tokenizeArray variable
             elif checkStrUp_pattern.match(Arr[i][j]) == None and checkStrLow_pattern.match(Arr[i][j]) == None and var_pattern.match(Arr[i][j]) != None: #if condition if the current word matches does not match any keywords, but match for variable
                 tokenizeArray.append("IDENT")                                                                                                           #appends "IDENT" into the tokenizeArray variable since the current word is matches for the regular expression for variable or identifier
-                if str_pattern.match(Arr[i][j-1]) != None:                                                                                              #if current word is identifier and word before it is STR
-                    varTable.append("STR, %s" %Arr[i][j])                                                                                               #appends "STR" and the current word into the varTable variable
+                if str_pattern.match(Arr[i][j-1]) != None:
+                    varctr = "STR", "%s" %Arr[i][j]                                                                                     #if current word is identifier and word before it is STR
+                    varTable.append(varctr)                                                                                               #appends "STR" and the current word into the varTable variable
                     identifiedVariables.append(Arr[i][j])                                                                                               #appends the current word into the identifiedVariables variable
                 elif int_pattern.match(Arr[i][j-1]) != None:                                                                                            #if current word is identifier and word before it is INT
-                    varTable.append("INT, %s" %Arr[i][j])                                                                                               #appends "INT" and the current word into the varTable variable
+                    varctr = "INT", "%s" %Arr[i][j]                                                                                      #if current word is identifier and word before it is STR
+                    varTable.append(varctr)                                                                                                #appends "INT" and the current word into the varTable variable
                     identifiedVariables.append(Arr[i][j])                                                                                               #appends "IOL" into the tokenizeArray variable
                 else:                                                                                                                                   #if current word is an ident but was not initialize
                     if Arr[i][j] in identifiedVariables:                                                                                                #if current word is an ident but was not initialize but exists 
@@ -63,8 +66,8 @@ def sourceCodeTokenizer(Arr):
                 tokenizeArray.append("STR")                                                                                                             #append STR to tokenizeArray    
             elif int_pattern.match(Arr[i][j]) != None:                                                                                                  #if current word matches INT
                 tokenizeArray.append("INT")                                                                                                             #append INT to tokenizeArray
-            # elif into_pattern.match(Arr[i][j]) != None:                                                                                                 #if current word matches INTO
-            #     tokenizeArray.append("INTO")                                                                                                            #append INTO to tokenizeArray
+            elif into_pattern.match(Arr[i][j]) != None:                                                                                                 #if current word matches INTO
+                tokenizeArray.append("INTO")                                                                                                            #append INTO to tokenizeArray
             elif is_pattern.match(Arr[i][j]) != None:                                                                                                   #if current word matches IS
                 tokenizeArray.append("IS")                                                                                                              #append IS to tokenizeArray
             elif beg_pattern.match(Arr[i][j]) != None:                                                                                                  #if current word matches BEG
