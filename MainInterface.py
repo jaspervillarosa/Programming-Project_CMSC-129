@@ -11,7 +11,7 @@ from turtle import left
 from CodeTokenization import sourceCodeTokenizer
 from HelperFunctions import convertTextToArray, saveTokenToFile
 from Syntaxcheck import checksyntax
-
+from KeyFunctional import line_compile
 
 #----------------------------------------------------
 #overwrites the existing loaded file with changes appended using the text editor, if there is no file path, i.e. no opened file, calls saveAs()
@@ -61,10 +61,9 @@ def compileCode():
     inputStringName = os.path.basename(path)
     array = []
     Arr = convertTextToArray(file)
-    print("arr")
-    print(Arr)
     finalTokenArr, varTable, errorEncountered, errorLine, unknownWord= sourceCodeTokenizer(Arr)
-    
+    print("vartable")
+    print(varTable)
     saveTokenToFile(finalTokenArr)
     
     if errorEncountered == True:
@@ -121,7 +120,24 @@ def code_function(Arr):
     
     #if IOL, start the program
     #if LOI, print Program terminated successfuly and end the code_function()
-    
+
+    #print(finalTokenArr)
+    #print(Arr)
+    global var_arr
+    var_arr = [] #holds all variable and assignment operators
+    #read array by line
+    for index in range(len(Arr)):
+        # if(index+1 == len(finalTokenArr)):
+        #     var_arr= line_compile(Arr[index], "LOI", var_arr, varTable)
+        #     break
+
+        # else:
+            var_arr = line_compile(Arr[index], finalTokenArr[index], var_arr, varTable, finalTokenArr)
+
+    print("var_arr")
+    print(var_arr)
+
+
     return 0
 
     
