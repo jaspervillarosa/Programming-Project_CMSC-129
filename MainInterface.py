@@ -62,7 +62,8 @@ def compileCode():
     array = []
     Arr = convertTextToArray(file)
     finalTokenArr, varTable, errorEncountered, errorLine, unknownWord= sourceCodeTokenizer(Arr)
-
+    print("vartable")
+    print(varTable)
     saveTokenToFile(finalTokenArr)
     
     if errorEncountered == True:
@@ -111,7 +112,7 @@ def code_function(Arr):
     #create an empty array to store output
     
     #idea, prepare var table to hold
-     #for int/num/str, prepare variable with no content
+    #for int/num/str, prepare variable with no content
     #for Beg, pause the program to ask user for input, check table for var name and save content to said var
     # for NEWLN, switch to next element of output array
     #for operators, take the next 2 element and apply the correct operation
@@ -126,14 +127,15 @@ def code_function(Arr):
     var_arr = [] #holds all variable and assignment operators
     #read array by line
     for index in range(len(Arr)):
-        if(index+1 == len(finalTokenArr)):
-            var_arr= line_compile(Arr[index], "LOI", var_arr)
-            break
+        # if(index+1 == len(finalTokenArr)):
+        #     var_arr= line_compile(Arr[index], "LOI", var_arr, varTable)
+        #     break
 
-        else:
-            var_arr= line_compile(Arr[index], finalTokenArr[index], var_arr)
+        # else:
+            var_arr = line_compile(Arr[index], finalTokenArr[index], var_arr, varTable, finalTokenArr)
 
-
+    print("var_arr")
+    print(var_arr)
 
 
     return 0
