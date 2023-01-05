@@ -15,7 +15,8 @@ def line_compile(Input, Token, var_arr, varTable, finalTokenArr):
     for index in range(len(Token)):
         inword = Input[index]       #important when handling idents, str, ints, and int_lit
         tkword = Token[index]       #compare each word with the token
-                
+        print(inword)
+        print(f"line{index}: {Input}")
                 
         match tkword:
             case "IOL":
@@ -28,7 +29,7 @@ def line_compile(Input, Token, var_arr, varTable, finalTokenArr):
 
             case "IS":
                 #assign value from the next to previous
-                var_arr = IS_func(Input, varTable, index, Token, var_arr)
+                var_arr.append(IS_func(Input, varTable, index, Token, var_arr))
                 print("Assigned value to " + Input[index-1])
 
             case "BEG":
@@ -125,7 +126,14 @@ def IS_func(Input, varTable, index, Token, var_arr):
     # print("nisulod sa IS")
     # print("nadakpan si is")
     # print(Input[index])
-    
+
+    print(f"ENTERED IS:: {Input}")
+    print(f"IS_FUNC:: VarTable [{varTable}]")
+    print(f"IS_FUNC:: Token [{Token}]")
+    print(f"IS_FUNC:: var_arr [{var_arr}]")
+
+
+
     leftword = Input[index-1]                             #get lefword ni is 
     inputrightword = Input[index+1]                       #get rightword ni is
     tokenizedrightword = Token[index+1]
