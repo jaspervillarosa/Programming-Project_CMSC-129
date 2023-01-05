@@ -210,6 +210,12 @@ def IS_func(Input, varTable, index, Token, var_arr):
             #     print("DIV iyang tapad.")
                 #insert DIV operation  
             else:
+                for i in range(len(var_arr)):
+                    if inputrightword == var_arr[i][0][1]:
+                        inputrightword = int(var_arr[i][1])
+                        break
+                # return variable, counter
+                holder = (varTable[i], inputrightword)
                 print("diri tung pag ang variable ang right side ni IS")
 
     
