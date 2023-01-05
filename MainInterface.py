@@ -112,7 +112,7 @@ def code_function(Arr):
     #create an empty array to store output
     
     #idea, prepare var table to hold
-     #for int/num/str, prepare variable with no content
+    #for int/num/str, prepare variable with no content
     #for Beg, pause the program to ask user for input, check table for var name and save content to said var
     # for NEWLN, switch to next element of output array
     #for operators, take the next 2 element and apply the correct operation

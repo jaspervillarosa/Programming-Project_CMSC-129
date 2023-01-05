@@ -10,12 +10,13 @@ def var_reveal(Input, index, var_arr):
 def line_compile(Input, Token, var_arr, varTable, finalTokenArr):
     #print(Input)
     # print(Token)
-   
+
     #take the 2 lines, read each word from token
     for index in range(len(Token)):
         inword = Input[index]       #important when handling idents, str, ints, and int_lit
         tkword = Token[index]       #compare each word with the token
-        
+                
+                
         match tkword:
             case "IOL":
                 #do nothing
