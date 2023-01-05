@@ -114,7 +114,7 @@ def PRINT_func(Input, Token, varTable, index, var_arr):
             if rightword == temp:
                 #print("nakasulod diri" + rightword)
                 value = var_arr[i][1]
-                print("the value of "+ rightword + " is " + value)
+                print("the value of "+ rightword + " is " + str(value))
     elif tokenrightword in literals:
         print(f"PRINT_FUNC:: test [{operatorsFunction(evaluationArray, var_arr)}]")
 
@@ -221,13 +221,13 @@ def IS_func(Input, varTable, index, Token, var_arr):
 
 
     #check if varname already exist in var_arr
-    # for i in range(len(var_arr)):
-    #     if leftword == var_arr[i][1]:
-    #         var_arr.pop(i)
-    #         break
+    for i in range(len(var_arr)):
+        if leftword == var_arr[i][1]:
+            var_arr.pop(i)
+            break
 
-    # var_arr.append(holder)
-    # return var_arr
+    var_arr.append(holder)
+    return var_arr
 
 # def MULT_func(Input, Token, index, var_arr):
 #     #check the next 2 words, convert if var
