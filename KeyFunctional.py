@@ -28,7 +28,7 @@ def line_compile(Input, Token, var_arr, varTable, finalTokenArr):
 
             case "IS":
                 #assign value from the next to previous
-                var_arr.append(IS_func(Input, varTable, index, Token))
+                var_arr = IS_func(Input, varTable, index, Token, var_arr)
                 print("Assigned value to " + Input[index-1])
 
             case "BEG":
@@ -118,7 +118,7 @@ def PRINT_func(Input, Token, varTable, index, var_arr):
     #print("++++")
     
     
-def IS_func(Input, varTable, index, Token):
+def IS_func(Input, varTable, index, Token, var_arr):
     holder =  ""
     # print("-----")
     # print(Token)
@@ -166,7 +166,15 @@ def IS_func(Input, varTable, index, Token):
     #check if operator, a variable, or none
     #keyword = Input[index+1]     
 
-    return holder
+
+    #check if varname already exist in var_arr
+    for i in range(len(var_arr)):
+        if leftword == var_arr[i][1]:
+            var_arr.pop(i)
+            break
+
+    var_arr.append(holder)
+    return var_arr
 
 # def MULT_func(Input, Token, index, var_arr):
 #     #check the next 2 words, convert if var
