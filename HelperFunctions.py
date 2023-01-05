@@ -6,6 +6,7 @@ def convertTextToArray(textFile):
     #for loop to iterate the array that contains the elements of the input file by line
     for i in range(len(content)): 
         content2 = content[i].split(" ")        #individualizes the words per elements from the lines 
+        print(f"content2:: [{content2}]")
         if i == (len(content)-1):
             break
         Arr.append(content2)                    #stores into another array

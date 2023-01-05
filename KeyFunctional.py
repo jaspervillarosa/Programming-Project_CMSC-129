@@ -1,6 +1,8 @@
 from array import array
 from tkinter import simpledialog
 
+from OperatorsFunctionality import operatorsFunction
+
 def var_reveal(Input, index, var_arr):
     #check for var in var_arr
     for index in range(len(var_arr)):
@@ -79,12 +81,27 @@ def BEG_func(Input, Token, var_arr, varTable, index):
                 
 
 def PRINT_func(Input, Token, varTable, index, var_arr):
+    literals = ["ADD", "SUB", "MULT", "DIV", "MOD"]
     # print("wow")
     # print("nisulod sa PRINT")
     # print(Input[index])
     value = -1
     rightword = Input[index+1]
     tokenrightword = Token[index+1]
+    evaluationArray = []
+    
+    def append_values(Input):
+        tempArray = []
+        isFound = False
+        for item in Input:
+            if isFound:
+                tempArray.append(item)
+            elif item in literals:
+                isFound = True
+                tempArray.append(item)
+        return tempArray
+        
+    evaluationArray = append_values(Input)
     
     # print(var_arr)
     # print("----")
@@ -98,20 +115,23 @@ def PRINT_func(Input, Token, varTable, index, var_arr):
                 #print("nakasulod diri" + rightword)
                 value = var_arr[i][1]
                 print("the value of "+ rightword + " is " + value)
-    elif tokenrightword == "MULT":
-        print("operator iyang tapad.")
-        #iinsert ang operation na rule
-    elif tokenrightword == "MOD":
-        print("operator iyang tapad.")
-        #iinsert ang operation na rule
-    elif tokenrightword == "DIV":
-        print("operator iyang tapad.")
-        #iinsert ang operation na rule
-    elif tokenrightword == "ADD":
-        print("operator iyang tapad.")
-        #iinsert ang operation na rule
-    elif tokenrightword == "SUB":
-        print("operator iyang tapad.")
+    elif tokenrightword in literals:
+        print(f"PRINT_FUNC:: test [{operatorsFunction(evaluationArray, var_arr)}]")
+
+    # elif tokenrightword == "MULT":
+    #     print("operator iyang tapad.")
+    #     #iinsert ang operation na rule
+    # elif tokenrightword == "MOD":
+    #     print("operator iyang tapad.")
+    #     #iinsert ang operation na rule
+    # elif tokenrightword == "DIV":
+    #     print("operator iyang tapad.")
+    #     #iinsert ang operation na rule
+    # elif tokenrightword == "ADD":
+    #     print("operator iyang tapad.")
+    #     #iinsert ang operation na rule
+    # elif tokenrightword == "SUB":
+    #     print("operator iyang tapad.")
         #iinsert ang operation na rule
     else:
         value = rightword
@@ -120,6 +140,8 @@ def PRINT_func(Input, Token, varTable, index, var_arr):
     
     
 def IS_func(Input, varTable, index, Token, var_arr):
+    literals = ["ADD", "SUB", "MULT", "DIV", "MOD"]
+    evaluationArray = []
     holder =  ""
     # print("-----")
     # print(Token)
@@ -127,10 +149,27 @@ def IS_func(Input, varTable, index, Token, var_arr):
     # print("nadakpan si is")
     # print(Input[index])
 
-    print(f"ENTERED IS:: {Input}")
+    print(f"ENTERED IS:: Input [{Input}]")
     print(f"IS_FUNC:: VarTable [{varTable}]")
     print(f"IS_FUNC:: Token [{Token}]")
     print(f"IS_FUNC:: var_arr [{var_arr}]")
+
+    #get only the values for operation
+
+    def append_values(Input):
+        tempArray = []
+        isFound = False
+        for item in Input:
+            if isFound:
+                tempArray.append(item)
+            elif item in literals:
+                isFound = True
+                tempArray.append(item)
+        return tempArray
+
+        
+    evaluationArray = append_values(Input)
+    print(f"IS_FUNC:: evaluationArray [{evaluationArray}]")
 
 
 
@@ -151,23 +190,29 @@ def IS_func(Input, varTable, index, Token, var_arr):
         if leftword == varTable[i][1]:                    #if leftword naga exist sa vartable
             if tokenizedrightword == "INT_LIT": #if rightword kay INT_LIT iyang tokenized version
                 holder = (varTable[i], inputrightword)    #hold ang Datatype, varname, and rightword ni is
-            elif tokenizedrightword == "MULT":
-                #insert mult operation
-                print("mult iyang tapad.")
-            elif tokenizedrightword == "ADD":
-                print("ADD iyang tapad.")
-                #insert add operation
-            elif tokenizedrightword == "MOD":
-                print("MOD iyang tapad.")
-                #insert mod operation
-            elif tokenizedrightword == "SUB":
-                print("SUB iyang tapad.")
-                #insert SUB operation
-            elif tokenizedrightword == "DIV": 
-                print("DIV iyang tapad.")
+            elif tokenizedrightword in literals:
+                inputrightword = operatorsFunction(evaluationArray, var_arr)
+                print(f"IS_FUNC:: test [{inputrightword}]")
+                holder = (varTable[i], inputrightword)
+            # elif tokenizedrightword == "MULT":
+            #     #insert mult operation
+            #     print("mult iyang tapad.")
+            # elif tokenizedrightword == "ADD":
+            #     print("ADD iyang tapad.")
+            #     #insert add operation
+            # elif tokenizedrightword == "MOD":
+            #     print("MOD iyang tapad.")
+            #     #insert mod operation
+            # elif tokenizedrightword == "SUB":
+            #     print("SUB iyang tapad.")
+            #     #insert SUB operation
+            # elif tokenizedrightword == "DIV": 
+            #     print("DIV iyang tapad.")
                 #insert DIV operation  
             else:
                 print("diri tung pag ang variable ang right side ni IS")
+
+    
                 #iconvert ang variable to iyahang data  
     #call the table, assign var and its value as tuple to the table\\
     #assuming IS is the index, the index-1 should be the variable, index+1 should be value
@@ -176,13 +221,13 @@ def IS_func(Input, varTable, index, Token, var_arr):
 
 
     #check if varname already exist in var_arr
-    for i in range(len(var_arr)):
-        if leftword == var_arr[i][1]:
-            var_arr.pop(i)
-            break
+    # for i in range(len(var_arr)):
+    #     if leftword == var_arr[i][1]:
+    #         var_arr.pop(i)
+    #         break
 
-    var_arr.append(holder)
-    return var_arr
+    # var_arr.append(holder)
+    # return var_arr
 
 # def MULT_func(Input, Token, index, var_arr):
 #     #check the next 2 words, convert if var
