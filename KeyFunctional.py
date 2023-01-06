@@ -9,7 +9,7 @@ def var_reveal(Input, index, var_arr):
         if(Input == var_arr[index][0]):
             return var_arr[index][1]
 
-def line_compile(Input, Token, var_arr, varTable, finalTokenArr):
+def line_compile(Input, Token, var_arr, varTable, finalTokenArr, output_arr):
     #print(Input)
     # print(Token)
 
@@ -40,11 +40,11 @@ def line_compile(Input, Token, var_arr, varTable, finalTokenArr):
                 
             
             case "PRINT":
-                PRINT_func(Input, Token, varTable, index, var_arr)
+                output_arr.append(PRINT_func(Input, Token, varTable, index, var_arr))
                 
-            # case "NEWLN":
+            case "NEWLN":
             #     #add new line
-            #     return
+                 output_arr.append("\n")
             
             # case "MULT":
             # #save the next 3 words and perform multiplication
@@ -56,7 +56,7 @@ def line_compile(Input, Token, var_arr, varTable, finalTokenArr):
             var_arr.pop(i) 
             break
     
-    return var_arr
+    return (var_arr, output_arr)
 
 def BEG_func(Input, Token, var_arr, varTable, index):
     
@@ -114,9 +114,10 @@ def PRINT_func(Input, Token, varTable, index, var_arr):
             if rightword == temp:
                 #print("nakasulod diri" + rightword)
                 value = var_arr[i][1]
-                print("the value of "+ rightword + " is " + str(value))
+                string = "the value of "+ rightword + " is " + str(value)
+                return string
     elif tokenrightword in literals:
-        print(operatorsFunction(evaluationArray, var_arr))
+        return operatorsFunction(evaluationArray, var_arr)
 
     # elif tokenrightword == "MULT":
     #     print("operator iyang tapad.")

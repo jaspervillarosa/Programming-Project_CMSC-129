@@ -125,6 +125,7 @@ def code_function(Arr):
     #print(Arr)
     global var_arr
     var_arr = [] #holds all variable and assignment operators
+    output_arr =[]
     #read array by line
     for index in range(len(Arr)):
         # if(index+1 == len(finalTokenArr)):
@@ -132,7 +133,10 @@ def code_function(Arr):
         #     break
 
         # else:
-            var_arr = line_compile(Arr[index], finalTokenArr[index], var_arr, varTable, finalTokenArr)
+            var_arr, output_arr = line_compile(Arr[index], finalTokenArr[index], var_arr, varTable, finalTokenArr, output_arr)
+
+    print("contents of output arr")
+    print(output_arr)
 
     # print("var_arr")
     # print(var_arr)
