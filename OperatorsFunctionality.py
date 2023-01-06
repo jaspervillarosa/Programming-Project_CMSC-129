@@ -1,6 +1,6 @@
 def operatorsFunction(array,var_arr):
-    print(f"Array:: [{array}]")
-    print(f"OPERATORSFUNCTION:: var_arr[{var_arr}]")
+    # print(f"Array:: [{array}]")
+    # print(f"OPERATORSFUNCTION:: var_arr[{var_arr}]")
     literals = ["ADD", "SUB", "MULT", "DIV", "MOD"]
     counter = 0
     def evaluate(array, counter):
@@ -9,9 +9,9 @@ def operatorsFunction(array,var_arr):
             return int(token), counter
         elif token in literals:
             operator1, counter = evaluate(array, counter+1)
-            print(f"Operator 1:: {operator1}")
+            # print(f"Operator 1:: {operator1}")
             operator2, counter = evaluate(array, counter+1)
-            print(f"Operator 2:: {operator2}")
+            # print(f"Operator 2:: {operator2}")
 
 
             if token == "ADD":
@@ -32,5 +32,5 @@ def operatorsFunction(array,var_arr):
             return variable, counter
 
     evaluationOutput = evaluate(array, counter)
-    print(f"EVALUATION OUTPUT:: {evaluationOutput[0]}")
+    # print(f"EVALUATION OUTPUT:: {evaluationOutput[0]}")
     return evaluationOutput[0]

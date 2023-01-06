@@ -134,8 +134,8 @@ def code_function(Arr):
         # else:
             var_arr = line_compile(Arr[index], finalTokenArr[index], var_arr, varTable, finalTokenArr)
 
-    print("var_arr")
-    print(var_arr)
+    # print("var_arr")
+    # print(var_arr)
 
 
     return 0

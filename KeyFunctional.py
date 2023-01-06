@@ -17,8 +17,8 @@ def line_compile(Input, Token, var_arr, varTable, finalTokenArr):
     for index in range(len(Token)):
         inword = Input[index]       #important when handling idents, str, ints, and int_lit
         tkword = Token[index]       #compare each word with the token
-        print(inword)
-        print(f"line{index}: {Input}")
+        # print(inword)
+        # print(f"line{index}: {Input}")
                 
         match tkword:
             case "IOL":
@@ -116,7 +116,7 @@ def PRINT_func(Input, Token, varTable, index, var_arr):
                 value = var_arr[i][1]
                 print("the value of "+ rightword + " is " + str(value))
     elif tokenrightword in literals:
-        print(f"PRINT_FUNC:: test [{operatorsFunction(evaluationArray, var_arr)}]")
+        print(operatorsFunction(evaluationArray, var_arr))
 
     # elif tokenrightword == "MULT":
     #     print("operator iyang tapad.")
@@ -149,10 +149,10 @@ def IS_func(Input, varTable, index, Token, var_arr):
     # print("nadakpan si is")
     # print(Input[index])
 
-    print(f"ENTERED IS:: Input [{Input}]")
-    print(f"IS_FUNC:: VarTable [{varTable}]")
-    print(f"IS_FUNC:: Token [{Token}]")
-    print(f"IS_FUNC:: var_arr [{var_arr}]")
+    # print(f"ENTERED IS:: Input [{Input}]")
+    # print(f"IS_FUNC:: VarTable [{varTable}]")
+    # print(f"IS_FUNC:: Token [{Token}]")
+    # print(f"IS_FUNC:: var_arr [{var_arr}]")
 
     #get only the values for operation
 
@@ -169,7 +169,7 @@ def IS_func(Input, varTable, index, Token, var_arr):
 
         
     evaluationArray = append_values(Input)
-    print(f"IS_FUNC:: evaluationArray [{evaluationArray}]")
+    # print(f"IS_FUNC:: evaluationArray [{evaluationArray}]")
 
 
 
@@ -192,7 +192,7 @@ def IS_func(Input, varTable, index, Token, var_arr):
                 holder = (varTable[i], inputrightword)    #hold ang Datatype, varname, and rightword ni is
             elif tokenizedrightword in literals:
                 inputrightword = operatorsFunction(evaluationArray, var_arr)
-                print(f"IS_FUNC:: test [{inputrightword}]")
+                # print(f"IS_FUNC:: test [{inputrightword}]")
                 holder = (varTable[i], inputrightword)
             # elif tokenizedrightword == "MULT":
             #     #insert mult operation
