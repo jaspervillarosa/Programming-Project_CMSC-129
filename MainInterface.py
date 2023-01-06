@@ -56,7 +56,7 @@ def openFile():
 
 #reads the .iol file, processes and performs lexical analysis through the sourceCodeTokenizer()
 def compileCode():
-    global finalTokenArr, varTable, errorEncountered, errorLine, unknownWord
+    global finalTokenArr, varTable, errorEncountered, errorLine, unknownWord, Arr
     file = textEditor.get(1.0, tkinter.END)
     inputStringName = os.path.basename(path)
     array = []
@@ -100,7 +100,16 @@ def compileCode():
 
     #proceed to functionality
     #split the string into line and individually check the functionality of each keyword in line
-    code_function(Arr)
+    
+
+def executecode():
+    if(finalTokenArr == None):
+        #final token arr does not exist
+        print("No Token")
+    else:
+          code_function(Arr)
+    return 0
+
 
 def code_function(Arr):
     #needs array of the original codes before tokenized
@@ -236,7 +245,7 @@ mainMenuBar.add_cascade(label='File', menu=fileMenu)
 functionalitiesMenu = Menu(mainMenuBar, tearoff=0)
 functionalitiesMenu.add_command(label= 'Compile Code', command=compileCode)
 functionalitiesMenu.add_command(label= 'Show Tokenize Code', command=showTokenizeCode)
-functionalitiesMenu.add_command(label= 'Execute Code', command='')
+functionalitiesMenu.add_command(label= 'Execute Code', command=executecode)
 #execute code button exist but there is no function connected to it
 mainMenuBar.add_cascade(label='Functionalities', menu=functionalitiesMenu)
 
