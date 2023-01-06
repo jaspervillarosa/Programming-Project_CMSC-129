@@ -23,16 +23,15 @@ def line_compile(Input, Token, var_arr, varTable, finalTokenArr, output_arr):
         match tkword:
             case "IOL":
                 #do nothing
-                print("IOL")
+                output_arr.append("IOL Execution: \n")
                 
             case "LOI":
                 #write end of code
-                print("End of Code")
-
+                output_arr.append("\nEnd of Execution")
             case "IS":
                 #assign value from the next to previous
                 var_arr.append(IS_func(Input, varTable, index, Token, var_arr))
-                output_arr.append("Assigned value to " + Input[index-1])
+                #output_arr.append("Assigned value to " + Input[index-1])
 
             case "BEG":
                 #stop the program and ask the user for value
@@ -77,7 +76,8 @@ def BEG_func(Input, Token, var_arr, varTable, index, output_arr):
                 begarr.append(holder)
                 print("int sya")
 
-    output_arr.append("Input for " + rightword + ": " + holder[1])
+    input = holder[1]
+    output_arr.append("Input for " + rightword + ": " + input)
     return (holder, output_arr)
                 
                 
@@ -116,7 +116,7 @@ def PRINT_func(Input, Token, varTable, index, var_arr):
             if rightword == temp:
                 #print("nakasulod diri" + rightword)
                 value = var_arr[i][1]
-                string = "the value of "+ rightword + " is " + str(value)
+                string = str(value)
                 return string
     elif tokenrightword in literals:
         return operatorsFunction(evaluationArray, var_arr)
@@ -138,7 +138,8 @@ def PRINT_func(Input, Token, varTable, index, var_arr):
         #iinsert ang operation na rule
     else:
         value = rightword
-        print("the value of "+ rightword + " is " + value)
+        string =value
+        return string
     #print("++++")
     
     
