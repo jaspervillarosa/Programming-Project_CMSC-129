@@ -1,5 +1,5 @@
 from array import array
-from tkinter import simpledialog
+from tkinter import simpledialog #a pop up dialog box library that will be use for the user input
 
 from OperatorsFunctionality import operatorsFunction
 
@@ -10,15 +10,11 @@ def var_reveal(Input, index, var_arr):
             return var_arr[index][1]
 
 def line_compile(Input, Token, var_arr, varTable, finalTokenArr, output_arr):
-    #print(Input)
-    # print(Token)
 
     #take the 2 lines, read each word from token
     for index in range(len(Token)):
         inword = Input[index]       #important when handling idents, str, ints, and int_lit
         tkword = Token[index]       #compare each word with the token
-        # print(inword)
-        # print(f"line{index}: {Input}")
                 
         match tkword:
             case "IOL":
@@ -40,15 +36,12 @@ def line_compile(Input, Token, var_arr, varTable, finalTokenArr, output_arr):
                 
             
             case "PRINT":
+                #if PRINT is encounter and proceed of printing the message and result
                 output_arr.append(PRINT_func(Input, Token, varTable, index, var_arr))
                 
             case "NEWLN":
-            #     #add new line
+                 #add new line
                  output_arr.append("\n")
-            
-            # case "MULT":
-            # #save the next 3 words and perform multiplication
-            #     MULT_func(Input, Token, index, var_arr)
 
 
     for i in range(len(var_arr)) :
@@ -58,35 +51,29 @@ def line_compile(Input, Token, var_arr, varTable, finalTokenArr, output_arr):
     
     return (var_arr, output_arr)
 
+#function that checks the line if BEG is present and append a string or integer from user input
 def BEG_func(Input, Token, var_arr, varTable, index, output_arr):
     
     begarr = []
-    print("nadakpan si beg")
     rightword = Input[index+1]
     for j in range(len(varTable)):
         if rightword == varTable[j][1]:
-            print(rightword)
-            print(varTable[j][1])
             if varTable[j][0] == "STR":
                 holder = (varTable[j], simpledialog.askstring(title="Input", prompt="Input for " + rightword))
-                begarr.append(holder)
-                print("string siya")
+                begarr.append(holder) #ask the user for string input
             elif varTable[j][0] == "INT":
                 holder = (varTable[j], simpledialog.askinteger(title="Input", prompt="Input for " + rightword))
-                begarr.append(holder)
-                print("int sya")
+                begarr.append(holder) #ask the user for integer input
 
     input = holder[1]
     output_arr.append("Input for " + rightword + ": " + input + "\n")
     return (holder, output_arr)
                 
                 
-
+# a PRINT function that return the str and the evaluation str
 def PRINT_func(Input, Token, varTable, index, var_arr):
     literals = ["ADD", "SUB", "MULT", "DIV", "MOD"]
-    # print("wow")
-    # print("nisulod sa PRINT")
-    # print(Input[index])
+
     value = -1
     rightword = Input[index+1]
     tokenrightword = Token[index+1]
@@ -105,60 +92,28 @@ def PRINT_func(Input, Token, varTable, index, var_arr):
         
     evaluationArray = append_values(Input)
     
-    # print(var_arr)
-    # print("----")
-    # print(rightword)
     if tokenrightword == "IDENT":
         for i in range(len(var_arr)):
-            # print("=====")
             # print(var_arr[i][0][1] + "vs" + rightword)
             temp = var_arr[i][0][1]
             if rightword == temp:
-                #print("nakasulod diri" + rightword)
                 value = var_arr[i][1]
                 string = str(value)
                 return " "+string
     elif tokenrightword in literals:
         return " "+str(operatorsFunction(evaluationArray, var_arr))
 
-    # elif tokenrightword == "MULT":
-    #     print("operator iyang tapad.")
-    #     #iinsert ang operation na rule
-    # elif tokenrightword == "MOD":
-    #     print("operator iyang tapad.")
-    #     #iinsert ang operation na rule
-    # elif tokenrightword == "DIV":
-    #     print("operator iyang tapad.")
-    #     #iinsert ang operation na rule
-    # elif tokenrightword == "ADD":
-    #     print("operator iyang tapad.")
-    #     #iinsert ang operation na rule
-    # elif tokenrightword == "SUB":
-    #     print("operator iyang tapad.")
-        #iinsert ang operation na rule
     else:
         value = rightword
         string =value
         return " "+str(string)
-    #print("++++")
     
-    
+# a function that check if IS is present in the array and check the right side and left side to avoid errors
+# append the values on the right side of IS which is a literal value  
 def IS_func(Input, varTable, index, Token, var_arr):
     literals = ["ADD", "SUB", "MULT", "DIV", "MOD"]
     evaluationArray = []
     holder =  ""
-    # print("-----")
-    # print(Token)
-    # print("nisulod sa IS")
-    # print("nadakpan si is")
-    # print(Input[index])
-
-    # print(f"ENTERED IS:: Input [{Input}]")
-    # print(f"IS_FUNC:: VarTable [{varTable}]")
-    # print(f"IS_FUNC:: Token [{Token}]")
-    # print(f"IS_FUNC:: var_arr [{var_arr}]")
-
-    #get only the values for operation
 
     def append_values(Input):
         tempArray = []
@@ -172,62 +127,31 @@ def IS_func(Input, varTable, index, Token, var_arr):
         return tempArray
 
         
-    evaluationArray = append_values(Input)
-    # print(f"IS_FUNC:: evaluationArray [{evaluationArray}]")
+    evaluationArray = append_values(Input) #place the values inside the evaluation array
 
 
 
-    leftword = Input[index-1]                             #get lefword ni is 
-    inputrightword = Input[index+1]                       #get rightword ni is
+    leftword = Input[index-1]                             #get lefword of IS
+    inputrightword = Input[index+1]                       #get rightword of IS
     tokenizedrightword = Token[index+1]
     print("========")
     print(tokenizedrightword)
-    # print("left ni is")
-    # print(leftword)
-    # print("right ni is")
-    # print(inputrightword)
-    # print("right ni is pero tokenized version")
-    # print( finalTokenArrrightword)
 
 
     for i in range(len(varTable)):                      
-        if leftword == varTable[i][1]:                    #if leftword naga exist sa vartable
-            if tokenizedrightword == "INT_LIT": #if rightword kay INT_LIT iyang tokenized version
-                holder = (varTable[i], inputrightword)    #hold ang Datatype, varname, and rightword ni is
+        if leftword == varTable[i][1]:                    # check if leftword exist in the vartable
+            if tokenizedrightword == "INT_LIT":          #if rightword kay INT_LIT iyang tokenized version
+                holder = (varTable[i], inputrightword)    #hold the Datatype, varname, and rightword of IS
             elif tokenizedrightword in literals:
                 inputrightword = operatorsFunction(evaluationArray, var_arr)
-                # print(f"IS_FUNC:: test [{inputrightword}]")
                 holder = (varTable[i], inputrightword)
-            # elif tokenizedrightword == "MULT":
-            #     #insert mult operation
-            #     print("mult iyang tapad.")
-            # elif tokenizedrightword == "ADD":
-            #     print("ADD iyang tapad.")
-            #     #insert add operation
-            # elif tokenizedrightword == "MOD":
-            #     print("MOD iyang tapad.")
-            #     #insert mod operation
-            # elif tokenizedrightword == "SUB":
-            #     print("SUB iyang tapad.")
-            #     #insert SUB operation
-            # elif tokenizedrightword == "DIV": 
-            #     print("DIV iyang tapad.")
-                #insert DIV operation  
+
             else:
                 for i in range(len(var_arr)):
                     if inputrightword == var_arr[i][0][1]:
                         inputrightword = int(var_arr[i][1])
                         break
-                # return variable, counter
-                holder = (varTable[i], inputrightword)
-                print("diri tung pag ang variable ang right side ni IS")
-
-    
-                #iconvert ang variable to iyahang data  
-    #call the table, assign var and its value as tuple to the table\\
-    #assuming IS is the index, the index-1 should be the variable, index+1 should be value
-    #check if operator, a variable, or none
-    #keyword = Input[index+1]     
+                holder = (varTable[i], inputrightword)  #holder of the right side variable of IS
 
 
     #check if varname already exist in var_arr
@@ -238,17 +162,3 @@ def IS_func(Input, varTable, index, Token, var_arr):
 
     var_arr.append(holder)
     return var_arr
-
-# def MULT_func(Input, Token, index, var_arr):
-#     #check the next 2 words, convert if var
-#     if(Token[index+1] == "IDENT"):
-#         num1 = var_reveal(Input, index+1, var_arr)
-#     else:
-#         num1 = Input[index+1]
-    
-#     if(Token[index+2] == "IDENT"):
-#         num2 = var_reveal(Input, index+2, var_arr)
-#     else:
-#         num2 = Input[index+2]
-    
-#     return num1 * num2

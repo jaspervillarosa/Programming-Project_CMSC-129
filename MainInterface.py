@@ -62,7 +62,7 @@ def compileCode():
     array = []
     Arr = convertTextToArray(file)
     finalTokenArr, varTable, errorEncountered, errorLine, unknownWord= sourceCodeTokenizer(Arr)
-    print("vartable")
+    print("Vartable: ")
     print(varTable)
     saveTokenToFile(finalTokenArr)
     
@@ -97,9 +97,6 @@ def compileCode():
         res = "Syntax Analysis Successful without problems found."
         displayMsg.insert(END, res)
         displayMsg.pack()
-
-    #proceed to functionality
-    #split the string into line and individually check the functionality of each keyword in line
     
 
 def executecode():
@@ -112,39 +109,15 @@ def executecode():
 
 
 def code_function(Arr):
-    #needs array of the original codes before tokenized
-    #split code into line
-    #send each line to another function
-    #check each word on each line
-    #assuming the code was created correctly(checked both lexical and syntax), assume functionality of keyword
-    #create a match() for each keyword, if not keyword, assume either variable or constant
-    #create an empty array to store output
-    
-    #idea, prepare var table to hold
-    #for int/num/str, prepare variable with no content
-    #for Beg, pause the program to ask user for input, check table for var name and save content to said var
-    # for NEWLN, switch to next element of output array
-    #for operators, take the next 2 element and apply the correct operation
-    #for print, print the current var or constant
-    
-    #if IOL, start the program
-    #if LOI, print Program terminated successfuly and end the code_function()
-
-    #print(finalTokenArr)
-    #print(Arr)
+   
     global var_arr
     var_arr = [] #holds all variable and assignment operators
     output_arr =[]
     #read array by line
     for index in range(len(Arr)):
-        # if(index+1 == len(finalTokenArr)):
-        #     var_arr= line_compile(Arr[index], "LOI", var_arr, varTable)
-        #     break
-
-        # else:
             var_arr, output_arr = line_compile(Arr[index], finalTokenArr[index], var_arr, varTable, finalTokenArr, output_arr)
 
-    print("contents of output arr")
+    print("Contents of output arr: ")
     print(output_arr)
     finalString = ""
 
@@ -160,8 +133,6 @@ def code_function(Arr):
     displayMsg.delete('1.0', END)
     displayMsg.insert(END, finalString)
     displayMsg.pack()
-    # print("var_arr")
-    # print(var_arr)
 
 
     return 0
@@ -214,8 +185,8 @@ def showTokenizeCode():
                 finalTokenstr += "\n"
 
             finalTokenstr = finalTokenstr + "\n" 
-            tokenAndVariablesLabel.create_text(210,245, text=finalTokenstr, fill='black')
-            tokenAndVariablesLabel.pack()
+            displaytknAndVariables.insert(END, finalTokenstr)
+            displaytknAndVariables.pack()
 
             displayMsg.delete('1.0', END)
             res = "Tokenized Code for file name %s Compiled Sucessfully " %inputStringName
@@ -275,7 +246,10 @@ consoleLabel.pack(side='top')
 tokenAndVariablesLabel = Canvas(tokenAndVariablesFrame, width=450, height= 850)
 tokenAndVariablesLabel.pack(side='top')
 
-displayMsg = Text(consoleLabel)
+displaytknAndVariables = Text(tokenAndVariablesLabel)  # container that display the content inside the table of Variables
+displaytknAndVariables.pack()
+
+displayMsg = Text(consoleLabel) # container that display the content inside the console log
 displayMsg.pack()
 
 mainWindow.mainloop()
