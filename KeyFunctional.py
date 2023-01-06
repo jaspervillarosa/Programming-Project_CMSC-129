@@ -32,11 +32,12 @@ def line_compile(Input, Token, var_arr, varTable, finalTokenArr, output_arr):
             case "IS":
                 #assign value from the next to previous
                 var_arr.append(IS_func(Input, varTable, index, Token, var_arr))
-                print("Assigned value to " + Input[index-1])
+                output_arr.append("Assigned value to " + Input[index-1])
 
             case "BEG":
                 #stop the program and ask the user for value
-                var_arr.append(BEG_func(Input, Token, var_arr, varTable, index))
+                var_line, output_arr = BEG_func(Input, Token, var_arr, varTable, index, output_arr)
+                var_arr.append(var_line)
                 
             
             case "PRINT":
@@ -58,7 +59,7 @@ def line_compile(Input, Token, var_arr, varTable, finalTokenArr, output_arr):
     
     return (var_arr, output_arr)
 
-def BEG_func(Input, Token, var_arr, varTable, index):
+def BEG_func(Input, Token, var_arr, varTable, index, output_arr):
     
     begarr = []
     print("nadakpan si beg")
@@ -76,7 +77,8 @@ def BEG_func(Input, Token, var_arr, varTable, index):
                 begarr.append(holder)
                 print("int sya")
 
-    return holder
+    output_arr.append("Input for " + rightword + ": " + holder[1])
+    return (holder, output_arr)
                 
                 
 
