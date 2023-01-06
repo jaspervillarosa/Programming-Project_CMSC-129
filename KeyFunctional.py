@@ -77,7 +77,7 @@ def BEG_func(Input, Token, var_arr, varTable, index, output_arr):
                 print("int sya")
 
     input = holder[1]
-    output_arr.append("Input for " + rightword + ": " + input)
+    output_arr.append("Input for " + rightword + ": " + input + "\n")
     return (holder, output_arr)
                 
                 
@@ -117,9 +117,9 @@ def PRINT_func(Input, Token, varTable, index, var_arr):
                 #print("nakasulod diri" + rightword)
                 value = var_arr[i][1]
                 string = str(value)
-                return string
+                return " "+string
     elif tokenrightword in literals:
-        return operatorsFunction(evaluationArray, var_arr)
+        return " "+str(operatorsFunction(evaluationArray, var_arr))
 
     # elif tokenrightword == "MULT":
     #     print("operator iyang tapad.")
@@ -139,7 +139,7 @@ def PRINT_func(Input, Token, varTable, index, var_arr):
     else:
         value = rightword
         string =value
-        return string
+        return " "+str(string)
     #print("++++")
     
     

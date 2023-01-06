@@ -137,7 +137,20 @@ def code_function(Arr):
 
     print("contents of output arr")
     print(output_arr)
+    finalString = ""
 
+    for i in range(len(output_arr)):
+        if isinstance(output_arr[i], str):
+            finalString = finalString+output_arr[i]
+            print(f"if:: {finalString}")
+        else:
+            finalString = finalString+str(output_arr[i])
+            print(f"else:: {finalString}")
+    print(finalString)
+
+    displayMsg.delete('1.0', END)
+    displayMsg.insert(END, finalString)
+    displayMsg.pack()
     # print("var_arr")
     # print(var_arr)
 
